@@ -1,0 +1,14 @@
+%Funcion para calcular la F-score (record y recall)
+
+
+fid=fopen('classes.csv')          %lectura del fichero modelo
+DocVT= textscan(fid,'%s%s');      %guardar el fichero en una tabla
+
+M_docVT=[DocVT{1,1},DocVT{1,2}]   %pasem de la taula a una matriu
+
+
+LVT=length(DocVT{1,1});         % devuelve la longitud de la fila (num de id, de referencia)
+%LFV=lenght(FV(1,1))            %devuelve la long de las imagenes a evaluar
+ 
+
+Map = containers.Map({DocVT{1,1}},{DocVT{1,2}} ); %intencion de crear un map
