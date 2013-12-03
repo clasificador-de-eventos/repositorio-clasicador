@@ -11,4 +11,9 @@ LVT=length(DocVT{1,1});         % devuelve la longitud de la fila (num de id, de
 %LFV=lenght(FV(1,1))            %devuelve la long de las imagenes a evaluar
  
 
-Map = containers.Map({DocVT{1,1}},{DocVT{1,2}} ); %intencion de crear un map
+
+
+Map = containers.Map(DocVT{1,1},DocVT{1,2} )
+
+
+values=Map('331843709583757506_53413075') 
