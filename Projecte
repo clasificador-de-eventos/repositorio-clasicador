@@ -1,0 +1,32 @@
+%%
+fid=fopen('clases.csv');
+x=textscan(fid,'%s%s');
+%%
+fid=fopen('metadades1.csv');
+y=textscan(fid,'%s%s');
+fclose(fid);
+
+%%
+
+clases=[x{1,1}, x{1,2}];
+info=[y{1,1},y{1,2}];
+concert=Idclase(clases, 'concert');
+
+
+
+%Entrenamiento
+%Sacar descriptores(tags)
+%Sacar grupos
+%classificar tags por grupos 
+
+%Descriptores
+%Hacer mismo proceso entrenamiento
+%Eliminar tags que no pertenezcan a no-event y los que se repiten
+
+%Classificadores
+%Comparar los tags de la nueva imagen con los que ya tenemos clasificados
+%Porcentages de coincidencia(matriz)
+%Buscar a que grupo pertenece cada foto mirando las coincidencias de los
+%tags
+
+%Avaluadors
