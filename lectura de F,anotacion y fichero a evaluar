@@ -1,19 +1,32 @@
 %Funcion para calcular la F-score (record y recall)
 
-
-fid=fopen('classes.csv')          %lectura del fichero modelo
-DocVT= textscan(fid,'%s%s');      %guardar el fichero en una tabla
-
-M_docVT=[DocVT{1,1},DocVT{1,2}]   %pasem de la taula a una matriu
+%Funcion para calcular la F-score (record y recall)
 
 
-LVT=length(DocVT{1,1});         % devuelve la longitud de la fila (num de id, de referencia)
-%LFV=lenght(FV(1,1))            %devuelve la long de las imagenes a evaluar
+fid=fopen('classes.csv')%lectura del fichero modelo
+DocVT= textscan(fid,'%s%s');%guardar el fichero en una tabla
+
+
+%fid=fopen('classesmire.csv')%lectura del fichero modelo
+%FaE= textscan(fid,'%s%s');%guardar el fichero en una tabla
+
+M_FaE=[FaE{1,1},FaE{1,2}];%pasamos el fichero a evaluar a una matriu
+LVT=length(DocVT{1,1});% devuelve la longitud de la fila (num de id, de referencia)
+%LFV=lenght(FaE{1,1})%devuelve la long de las imagenes a evaluar
  
 
+%Map_evaluar = containers.Map(FaE{1,1},FaE{1,2} );
 
 
-Map = containers.Map(DocVT{1,1},DocVT{1,2} )
+Map = containers.Map(DocVT{1,1},DocVT{1,2} )%creacion un contenedor de mapas
 
 
-values=Map('331843709583757506_53413075') 
+%values=Map('331843709583757506_53413075')
+L=length(Map)
+%Map(1,1);
+Keys_eval = keys(Map)
+%valueSet = values(Map)
+for i=2:LFV
+    
+if(isKey(Map,........))   
+        if(
