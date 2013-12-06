@@ -1,0 +1,22 @@
+function [PC,PF,NF,NC] = matriz_confusion (event1, eventC,eval)
+
+PC=0;
+PF=0;
+NF=0;
+NC=0;
+
+  if  (strcmp(event1,eval)==1)  && (strcmp(eventC,eval)==1) %EVALUACION DE POSITIVOS_CIERTOS 
+      
+    PC=PC+1;
+      
+  elseif  (strcmp(event1,eval)==1)&& (strcmp(eventC,eval)==0)   %EVALUACION DE POITIVOS_FALSOS
+    PF=PF+1;
+      
+  elseif  (strcmp(event1,eval)==0)&& (strcmp(eventC,eval)==1)   %EVALUACION DE NEGATIVOS_FALSOS
+    NF=NF+1;
+      
+  elseif  (strcmp(event1,eval)==0)&& (strcmp(eventC,eval)==0)   %EVALUACION DE NEGATIVOS_FALSOS
+    NC=NC+1;
+end
+
+
