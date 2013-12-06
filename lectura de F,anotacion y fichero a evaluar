@@ -1,5 +1,7 @@
-%Funcion para calcular la F-score (record y recall)
 
+
+
+%CODIGO PARA EVALUAR EL CLASSIFICADOR
 
 %...............LECTURA DEL FICHERO DE ANOTACIÓN..........TABLA....mapa
 fid=fopen('classes.csv')%lectura del fichero modelo
@@ -58,10 +60,10 @@ for i=1:LFV
 [PC,PF,NF]=matriz_confusion(event1,eventC,'')
  pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF;   
         
-        
-       
+ [precision,record,F_score]=accuracy (pc1,pf1,nf1)
+ 
  else disp('la imagen introducida no se puede evaluar') 
 
  end   
 end    
-       
+      
