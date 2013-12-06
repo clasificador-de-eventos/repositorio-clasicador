@@ -1,32 +1,67 @@
 %Funcion para calcular la F-score (record y recall)
 
-%Funcion para calcular la F-score (record y recall)
 
-
+%...............LECTURA DEL FICHERO DE ANOTACIÓN..........TABLA....mapa
 fid=fopen('classes.csv')%lectura del fichero modelo
 DocVT= textscan(fid,'%s%s');%guardar el fichero en una tabla
+%M_DocVT=[DocVT{1,1},DocVT{1,2}];%pasamos el fichero a evaluar a una matriu
+Map = containers.Map(DocVT{1,1},DocVT{1,2} );%creacion un contenedor de mapas
+L=length(Map)
+%values=Map('331843709583757506_53413075')
 
-
-%fid=fopen('classesmire.csv')%lectura del fichero modelo
+%................LECTURA FICHERO A EVALUAR....................TABLA..MATRIZ
+%fid=fopen('classes.csv')%lectura del fichero modelo
 %FaE= textscan(fid,'%s%s');%guardar el fichero en una tabla
+%M_FaE=[FaE{1,1},FaE{1,2}];%pasamos el fichero a evaluar a una matriu
 
-M_FaE=[FaE{1,1},FaE{1,2}];%pasamos el fichero a evaluar a una matriu
-LVT=length(DocVT{1,1});% devuelve la longitud de la fila (num de id, de referencia)
-%LFV=lenght(FaE{1,1})%devuelve la long de las imagenes a evaluar
- 
+%...................LECTURA FICHERO DE PRUEVA ..............MATRIZ_DIRECTA
 
+M_FaE=salidaclases; %igualacion de matriz obtenida con load(PRUEVAS)
+LFV=length(M_FaE)%devuelve la long de las imagenes a evaluar
 %Map_evaluar = containers.Map(FaE{1,1},FaE{1,2} );
 
 
-Map = containers.Map(DocVT{1,1},DocVT{1,2} )%creacion un contenedor de mapas
-
-
-%values=Map('331843709583757506_53413075')
-L=length(Map)
-%Map(1,1);
-Keys_eval = keys(Map)
+%Keys_eval = keys(Map)
 %valueSet = values(Map)
-for i=2:LFV
-    
-if(isKey(Map,........))   
-        if(
+pc1=0;  
+pf1=0;   
+nf1=0;
+for i=1:LFV
+ 
+    x=M_FaE(i,1);
+ if(isKey(Map,x))   
+    valueSet=values(Map,x);   %obtenemos el evento real de la foto evaluada
+       event1=char(M_FaE(i,2))%pasar a char para comparar
+       eventC=char(valueSet)
+
+ [PC,PF,NF]=matriz_confusion(event1,eventC,'concert')
+ pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF;  
+ 
+[PC,PF,NF]=matriz_confusion(event1,eventC,'theater_dance')
+ pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF; 
+ 
+[PC,PF,NF]=matriz_confusion(event1,eventC,'non_event')
+ pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF; 
+ 
+[PC,PF,NF]=matriz_confusion(event1,eventC,'protest')
+ pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF; 
+ 
+[PC,PF,NF]=matriz_confusion(event1,eventC,'other')
+ pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF; 
+ 
+[PC,PF,NF]=matriz_confusion(event1,eventC,'sports')
+ pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF;   
+        
+[PC,PF,NF]=matriz_confusion(event1,eventC,'fashion')
+ pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF;  
+ 
+[PC,PF,NF]=matriz_confusion(event1,eventC,'')
+ pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF;   
+        
+        
+       
+ else disp('la imagen introducida no se puede evaluar') 
+
+ end   
+end    
+       
