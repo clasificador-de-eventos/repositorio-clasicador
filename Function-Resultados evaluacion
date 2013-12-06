@@ -1,10 +1,11 @@
 %funcion que devuelve parametros de evaluacion a partir de los valores de la matriz de confusion
 
+function [ precision, record, F_score] = accuracy( PC,PF,NF )
 
-function [ precision, record, F-score] = accuracy( PC,PF,NF )
-
-precision= PC/PC+PF;
-record= PC/PC+NF;
-F_measure = (2*precision * Record)/(precision + Record)
+precision= PC/(PC+PF);
+record= PC/(PC+NF);
+F_score = (2*precision * record)/(precision + record);
 
 end
+
+
