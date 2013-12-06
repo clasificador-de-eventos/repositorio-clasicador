@@ -1,0 +1,30 @@
+Lt=length(tags2);
+k=1;
+for k=1:Lt
+    tag=tags2{k,2};
+    id=tags2(k,1);
+
+v=buscarcoin(tag,tagexihibition,tagsconcert, tagsconference, tagsdance, tagsfashion, tagsnoevent, tagsother, tagsprotest);
+
+L=length(v);
+max=0;
+
+for i=1:L
+    if max < v(i)
+        pos=i;
+        max=v(i);
+    end
+end
+    if k==1
+        salida=relacion(pos,id,tagexihibition,tagsconcert, tagsconference, tagsdance, tagsfashion, tagsnoevent, tagsother, tagsprotest)
+        k=2;
+    else
+        clase=relacion(pos,id,tagexihibition,tagsconcert, tagsconference, tagsdance, tagsfashion, tagsnoevent, tagsother, tagsprotest)
+        salida=[salida;clase]
+    end
+end
+%%
+
+dlmwrite('classificadors.csv',salida,' ')
+
+%csvwrite('total.csv',clase);
