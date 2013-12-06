@@ -10,9 +10,34 @@ fclose(fid);
 
 clases=[x{1,1}, x{1,2}];
 info=[y{1,1},y{1,2}];
+
 concert=Idclase(clases, 'concert');
+salidatags=selecciona1(info,'1');
+save metadatosfotos1.mat salidatags
+salidaclases=selecciona1(clases,'1');
+save clasesfotos1.mat salidaclases
+
+%%
+clear all
+load metadatosfotos1.mat
+load clasesfotos1.mat
+
+%%
+
+tags=separatags(salidatags);
+
+save tags.mat tags
+%%
+
+load tags.mat
 
 
+
+%N=length(concert);
+%for i= 1:N;
+%tagsconcert=tags(info, concert(i,1));
+
+%end;
 
 %Entrenamiento
 %Sacar descriptores(tags)
