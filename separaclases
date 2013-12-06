@@ -1,0 +1,15 @@
+function salida=separaclases(clases,tags,nomclase)
+
+L=length(clases);
+F=length(tags);
+salida=nomclase;
+for i=1:L
+    for k=1:F
+        
+        if strcmp(clases(i,1),tags(k,1));
+            
+            salida=[salida,tags{k,2}];
+        end
+    end
+end
+       
