@@ -1,0 +1,8 @@
+function [ precision, record, F_score] = accuracy( PC,PF,NF )
+
+precision= PC/(PC+PF);
+record= PC/(PC+NF);
+F_score = (2*precision * record)/(precision + record);
+
+end
+
