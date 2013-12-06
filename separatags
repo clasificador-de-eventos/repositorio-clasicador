@@ -1,0 +1,25 @@
+function salida=separatags(y)
+
+L=length(y);
+
+
+cont=1
+ anterior=[y(1,1),y(1,2)];
+ tags=y(1,2);
+ salida=[y(1,1),{y(1,2)}];
+ for i=2:L
+     
+     if strcmp(anterior(1,1),y(i,1))
+         tags=[tags, y(i,2)];
+    
+     
+     else
+         
+          salida(cont,2)={tags};
+          cont=cont+1;
+          tags=y(i,2);
+         salida=[salida;y(i,1),tags];
+     end
+    anterior=[y(i,1),y(i,2)];
+    
+ end
