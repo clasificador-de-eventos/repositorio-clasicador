@@ -1,0 +1,19 @@
+function clases=Idclase(x,nomclase)
+X=length(x);
+n=1;
+for i=2:X
+    j=x(i,2);
+    v=strcmp(nomclase, j);
+    if v == 1
+        if n==1
+            n=2;
+        clases=x(i,1);
+        
+        
+        else
+            clases=[clases ; x(i,1)];
+             
+             
+        end
+    end
+end
