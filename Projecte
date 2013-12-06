@@ -25,11 +25,31 @@ load clasesfotos1.mat
 %%
 
 tags=separatags(salidatags);
+events={'concert','conference','exhibition','fashion','other','protest','theater_dance','non_event'}
+
+idconcert=Idclase(salidaclases,events(1));
+idconference=Idclase(salidaclases,events(2));
+idexhibition=Idclase(salidaclases,events(3));
+idfashion=Idclase(salidaclases,events(4));
+idother=Idclase(salidaclases,events(5));
+idprotest=Idclase(salidaclases,events(6));
+idtdance=Idclase(salidaclases,events(7));
+idnoevent=Idclase(salidaclases,events(8));
 
 save tags.mat tags
-%%
 
-load tags.mat
+%%
+tagsconcert= separaclases(idconcert,tags,events(1));
+tagsconference= separaclases(idconference,tags,events(2));
+tagexihibition= separaclases(idexhibition,tags,events(3));
+tagsfashion= separaclases(idfashion,tags,events(4));
+tagsother= separaclases(idother,tags,events(5));
+tagsprotest= separaclases(idprotest,tags,events(6));
+tagsdance= separaclases(idtdance,tags,events(7));
+tagsnoevent= separaclases(idnoevent,tags,events(8));
+%%
+save tags-for-event.mat tagsconcert tagsconference tagexihibition tagsfashion tagsother tagsprotest tagsdance tagsnoevent;
+
 
 
 
@@ -44,9 +64,20 @@ load tags.mat
 %Sacar grupos
 %classificar tags por grupos 
 
+%%
 %Descriptores
 %Hacer mismo proceso entrenamiento
 %Eliminar tags que no pertenezcan a no-event y los que se repiten
+
+
+info=[y{1,1},y{1,2}];
+salidatags2=selecciona1(info,'2');
+tags2=separatags(salidatags2);
+save metadatosfotos2.mat tags2
+
+
+
+
 
 %Classificadores
 %Comparar los tags de la nueva imagen con los que ya tenemos clasificados
