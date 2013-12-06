@@ -15,7 +15,7 @@ NC=0;
   elseif  (strcmp(event1,eval)==0)&& (strcmp(eventC,eval)==1)   %EVALUACION DE NEGATIVOS_FALSOS
     NF=NF+1;
       
-  elseif  (strcmp(event1,eval)==0)&& (strcmp(eventC,eval)==0)   %EVALUACION DE NEGATIVOS_FALSOS
+  elseif  (strcmp(event1,eval)==0)&& (strcmp(eventC,eval)==0)   %EVALUACION DE NEGATIVOS_CIERTOS
     NC=NC+1;
 end
 
