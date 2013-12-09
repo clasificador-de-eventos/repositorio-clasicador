@@ -1,8 +1,11 @@
-function [ precision, record, F_score] = accuracy( PC,PF,NF )
+%THIS FUNCTION RETURNS precision, record and F-score VALUES
 
-precision= PC/(PC+PF);
-record= PC/(PC+NF);
-F_score = (2*precision * record)/(precision + record);
+
+function [ precision, record, F_score] = accuracy( PC,PF,NF ) %we enter positives and negatives values
+
+precision= PC/(PC+PF);                                       %calculation of precision value
+record= PC/(PC+NF);                                          %calculation of record value
+F_score = (2*precision * record)/(precision + record);       %calculation of record value
 
 end
 
