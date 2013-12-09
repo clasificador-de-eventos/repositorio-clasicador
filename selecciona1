@@ -1,6 +1,12 @@
-function salida=selecciona1(v,n)
+"selecciona1" is the function that search the Id's ended in a determinate number "n".
 
-% se le añade el vector de ID i saca todas las que acaben en el numero n
+% v --> is a table that contains a list of Id's and tags.
+% n --> is the number that we want at the end of Id's.
+
+%______________________________________________________________________________________%
+
+
+function salida=selecciona1(v,n)
 
 L=length(v);
 f=1;
