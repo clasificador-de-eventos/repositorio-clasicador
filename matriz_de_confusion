@@ -1,21 +1,21 @@
+%FUNCTION WHICH RETURNS THE VALUE OF THE DIFERNT POSITIVES AND NEGATIVES VALUES OF THE CONFUSION MATRIX
+
+
 function [PC,PF,NF,NC] = matriz_confusion (event1, eventC,eval)
 
-PC=0;
-PF=0;
-NF=0;
-NC=0;
+PC=0; PF=0; NF=0; NC=0; %variables declaration 
 
-  if  (strcmp(event1,eval)==1)  && (strcmp(eventC,eval)==1) %EVALUACION DE POSITIVOS_CIERTOS 
+  if  (strcmp(event1,eval)==1)  && (strcmp(eventC,eval)==1)     %POSITIVES_TRUES EVALUATION 
       
     PC=PC+1;
       
-  elseif  (strcmp(event1,eval)==1)&& (strcmp(eventC,eval)==0)   %EVALUACION DE POITIVOS_FALSOS
+  elseif  (strcmp(event1,eval)==1)&& (strcmp(eventC,eval)==0)   %POSITIVES_FALSES EVALUATION
     PF=PF+1;
       
-  elseif  (strcmp(event1,eval)==0)&& (strcmp(eventC,eval)==1)   %EVALUACION DE NEGATIVOS_FALSOS
+  elseif  (strcmp(event1,eval)==0)&& (strcmp(eventC,eval)==1)   %NEGATIVES_FALSES EVALUATION
     NF=NF+1;
       
-  elseif  (strcmp(event1,eval)==0)&& (strcmp(eventC,eval)==0)   %EVALUACION DE NEGATIVOS_CIERTOS
+  elseif  (strcmp(event1,eval)==0)&& (strcmp(eventC,eval)==0)   %NEGATIVES_TRUES EVALUATION
     NC=NC+1;
 end
 
