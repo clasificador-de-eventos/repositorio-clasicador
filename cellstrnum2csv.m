@@ -1,17 +1,4 @@
 function cellstrnum2csv(filename, cellarray, delimiter, separadordecimal)
-% Función para convertir un arreglo de celdas contenidos de strings y/o
-% enteros a un archivo csv usando cualquier simbolo como delimitador.
-
-% Uso: cellstrnum2csv(filename, cellarray, delimiter)
-
-% --> "filename" es un string con el nombre del archivo a exportar
-% --> "cellarray" es el arrglo de celdas que se desea exportar
-% --> "delimiter" es un string con el símbolo delimitador
-% --> "separadordecimal" es un string con el símbolo de separación decimal
-
-% Ej: cellstrnum2csv('datos.csv', resultados, ';', ',')
-
-% Hecho por el Yerba para el vago y numérico MatLab.
 
 fid = fopen(filename, 'wt');
 [filas columnas]=size(cellarray);
