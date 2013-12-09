@@ -1,10 +1,10 @@
-%This function is used for tansform a table in a csv document, using any delimiter%
+%This function is used for tansform a table in a csv document, using any delimiter
 % - filename: is a string with the name of export file
 % - cellarray: is the table that changed
 % - delimiter: is the delimiter between elements of table
 % - separador decimal: is a string that serves for separate decimals, if it's a table of numbers
 
-%_________________________________________________________________________________%
+%_________________________________________________________________________________
 
 function cellstrnum2csv(filename, cellarray, delimiter, separadordecimal)
 
