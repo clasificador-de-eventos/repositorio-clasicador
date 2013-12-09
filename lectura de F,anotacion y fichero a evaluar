@@ -1,78 +1,140 @@
 
-
 %CODIGO PARA EVALUAR EL CLASSIFICADOR
 
-%...............LECTURA DEL FICHERO DE ANOTACIÓN..........TABLA....mapa
-fid=fopen('classes.csv')%lectura del fichero modelo
-DocVT= textscan(fid,'%s%s');%guardar el fichero en una tabla
-%M_DocVT=[DocVT{1,1},DocVT{1,2}];%pasamos el fichero a evaluar a una matriu
-Map = containers.Map(DocVT{1,1},DocVT{1,2} );%creacion un contenedor de mapas
-L=length(Map)
-%values=Map('331843709583757506_53413075')
+%Calculate the F-score (record and precision)
 
-%................LECTURA FICHERO A EVALUAR....................TABLA..MATRIZ
-%fid=fopen('classes.csv')%lectura del fichero modelo
-%FaE= textscan(fid,'%s%s');%guardar el fichero en una tabla
-%M_FaE=[FaE{1,1},FaE{1,2}];%pasamos el fichero a evaluar a una matriu
+
+%...............READING OF ANNOTATIONS FILE.............. in a  containers.Map
+
+fid=fopen('classes.csv')                       %reading of the model file
+DocVT= textscan(fid,'%s%s');                   %save it in a table 
+Map = containers.Map(DocVT{1,1},DocVT{1,2} );  %create a container of maps
+L=length(Map)                                  %adquire the lenght of the map
+
+
+%................READING OF FILE TO ASSES......................in a matrix
+%fid=fopen('classes.csv')                      %reading of the classifications file
+%FaE= textscan(fid,'%s%s');                    %save it in a table 
+%M_FaE=[FaE{1,1},FaE{1,2}];                    %crate a matrix with the previous table
+
 
 %...................LECTURA FICHERO DE PRUEVA ..............MATRIZ_DIRECTA
 
 M_FaE=salidaclases; %igualacion de matriz obtenida con load(PRUEVAS)
 LFV=length(M_FaE)%devuelve la long de las imagenes a evaluar
-%Map_evaluar = containers.Map(FaE{1,1},FaE{1,2} );
 
 
-%Keys_eval = keys(Map)
-%valueSet = values(Map)
-pc1=0;  
-pf1=0;   
-nf1=0;
-nc1=0;
-for i=1:LFV
+
+%DECLARATION OF VARIABLES
+
+pc1=0; pc2=0; pc3=0; pc4=0; pc5=0; pc6=0; pc7=0; pc8=0; pc9=0;
+pf1=0; pf2=0; pf3=0; pf4=0; pf5=0; pf6=0; pf7=0; pf8=0; pf9=0; 
+nf1=0; nf2=0; nf3=0; nf4=0; nf5=0; nf6=0; nf7=0; nf8=0; nf9=0;
+nc1=0; nc2=0; nc3=0; nc4=0; nc5=0; nc6=0; nc7=0; nc8=0; nc9=0;
+
+%LOOP TO CREATE TE CONFUSION TABLES AND OBTAIN DIFERENT VALUES (precision, record, F-score)
+
+for i=1:LFV                         % pass for all the positions of the clasificators list
  
     x=M_FaE(i,1);
- if(isKey(Map,x))   
-    valueSet=values(Map,x);   %obtenemos el evento real de la foto evaluada
-       event1=char(M_FaE(i,2))%pasar a char para comparar
+    
+ if(isKey(Map,x))                  % function that returns 1 if  id_imagen(x) is in the map(Map) 
+    valueSet=values(Map,x);        % here we adquire the real event of the image to value
+       event1=char(M_FaE(i,2))b    % pas it to a char to be able to compare it with other chars
        eventC=char(valueSet)
-
- [PC,PF,NF,NC]=matriz_confusion(event1,eventC,'concert')
- pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF;  nc1=nc1+NC;
- 
- [PC,PF,NF,NC]=matriz_confusion(event1,eventC,'theater_dance')
- pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF; nc1=nc1+NC;
- 
- [PC,PF,NF,NC]=matriz_confusion(event1,eventC,'non_event')
- pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF; nc1=nc1+NC;
- 
- [PC,PF,NF,NC]=matriz_confusion(event1,eventC,'protest')
- pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF; nc1=nc1+NC;
- 
- [PC,PF,NF,NC]=matriz_confusion(event1,eventC,'other')
- pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF; nc1=nc1+NC;
- 
- [PC,PF,NF,NC]=matriz_confusion(event1,eventC,'sports')
- pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF;  nc1=nc1+NC; 
-        
- [PC,PF,NF,NC]=matriz_confusion(event1,eventC,'fashion')
- pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF;  nc1=nc1+NC;
- 
- [PC,PF,NF,NC]=matriz_confusion(event1,eventC,'exhibition')
- pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF;   nc1=nc1+NC;
-        
- [precision,record,F_score]=accuracy (pc1,pf1,nf1)
- 
- vals=[pc1, pf1;
-       nc1, nf1];
- col_fila={'POSITIVOS'; 'NEGATIVOS'};
- FILA={'POSITIVO','NEGATIVOS'};
- tblwrite(vals,col_fila, FILA , 'vals.xml')
- 
- else disp('la imagen introducida no se puede evaluar') 
-
- end   
-end    
        
+ %CALL THE FUNCTION matriz_confusion(), TO OBTAIN THE DIFERENT TABLES DEPENDING ON THE EVENT
 
-      
+ [PC,PF,NF,NC]=matriz_confusion(event1,eventC,'concert');
+ pc1=pc1+PC;  pf1=pf1+PF;   nf1=nf1+NF;  nc1=nc1+NC;
+ 
+ [PC,PF,NF,NC]=matriz_confusion(event1,eventC,'theater_dance');
+ pc2=pc2+PC;  pf2=pf2+PF;   nf2=nf2+NF; nc2=nc2+NC;
+ 
+ [PC,PF,NF,NC]=matriz_confusion(event1,eventC,'fashion');
+ pc3=pc3+PC;  pf3=pf3+PF;   nf3=nf3+NF; nc3=nc3+NC;
+ 
+ [PC,PF,NF,NC]=matriz_confusion(event1,eventC,'protest');
+ pc4=pc4+PC;  pf4=pf4+PF;   nf4=nf4+NF; nc4=nc4+NC;
+ 
+ [PC,PF,NF,NC]=matriz_confusion(event1,eventC,'exhibition');
+ pc5=pc5+PC;  pf5=pf5+PF;   nf1=nf5+NF; nc5=nc5+NC;
+ 
+ [PC,PF,NF,NC]=matriz_confusion(event1,eventC,'sports');
+ pc6=pc6+PC;  pf6=pf6+PF;   nf6=nf6+NF;  nc6=nc6+NC; 
+        
+ [PC,PF,NF,NC]=matriz_confusion(event1,eventC,'conference');
+  pc7=pc7+PC;  pf7=pf7+PF;   nf7=nf7+NF;  nc7=nc7+NC;
+        
+ [PC,PF,NF,NC]=matriz_confusion(event1,eventC,'other');
+  pc8=pc8+PC;  pf8=pf8+PF;   nf8=nf8+NF;   nc8=nc8+NC;
+ 
+ [PC,PF,NF,NC]=matriz_confusion(event1,eventC,'non_event');
+ pc9=pc9+PC;  pf9=pf9+PF;   nf9=nf9+NF;   nc9=nc9+NC;
+        
+        
+        
+  else disp('la imagen introducida no se puede evaluar')    %if the image is not in the model list, print it 
+ 
+ end   
+ 
+end    
 
+ 
+ %CREATE DIFERENT DOCUMENTS WITH THE DIFERENT RESULTS
+ 
+ 
+ val1=[pc1, pf1;
+       nc1, nf1];
+ COL={'POSITIVOS'; 'NEGATIVOS'};
+ FILA={'POSITIVO','NEGATIVOS'};
+ tblwrite(val1,COL, FILA , 'concert.xml')
+
+  val2=[pc2, pf2;
+       nc2, nf2];
+ tblwrite(val2,COL, FILA , 'theatre_dance.xml')
+ 
+ 
+val3=[pc3, pf3;
+       nc3, nf3];
+ tblwrite(val3,COL, FILA , 'fashion.xml')
+ 
+ val4=[pc4, pf4;
+       nc4, nf4];
+ tblwrite(val4,COL, FILA , 'protest.xml')
+
+ val5=[pc5, pf5;
+       nc5, nf5];
+ tblwrite(val5,COL, FILA , 'exhibition.xml')
+
+ 
+ val6=[pc6, pf6;
+       nc6, nf6];
+ tblwrite(val6,COL, FILA , 'sports.xml')      
+
+ 
+ val7=[pc7, pf7;
+       nc7, nf7];
+ tblwrite(val7,COL, FILA , 'conference.xml') 
+ 
+ val8=[pc8, pf8;
+       nc8, nf8];
+ tblwrite(val8,COL, FILA , 'others.xml') 
+ 
+ val9=[pc9, pf9;
+       nc9, nf9];
+ tblwrite(val9,COL, FILA , 'non_event.xml') 
+ 
+pc1=pc1+pc2+pc3+pc4+pc5+pc6+pc7+pc8+pc9;
+pf1=pf1+pf2+pf3+pf4+pf5+pf6+pf7+pf8+pf9;
+nf1=nf1+nf2+nf3+nf4+nf5+nf6+nf7+nf8+nf9;
+nc1=nc1+nc2+nc3+nc4+nc5+nc6+nc7+nc8+nf9;
+
+[precision,record,F_score]=accuracy (pc1,pf1,nf1) %CALL THE FUNCION WICH RETURNS precision, record and recall valules
+ valk=[pc1, pf1;
+       nc1, nf1];
+ tblwrite(valk,COL, FILA , 'avaluacion.xml')
+ 
+ 
+ 
+ 
