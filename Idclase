@@ -1,3 +1,9 @@
+%This function take all Id's of the table "x" that have the same "nomclase" that we search.
+% x --> is the Id and its class.
+% nomclase --> is the class that we search.
+%______________________________________________________________________________________________%
+
+
 function clases=Idclase(x,nomclase)
 X=length(x);
 n=1;
