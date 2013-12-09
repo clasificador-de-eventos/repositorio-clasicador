@@ -8,3 +8,5 @@ for i = 1:col
     end
 end
 newstring=string;
+
+
