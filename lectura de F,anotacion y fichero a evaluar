@@ -1,35 +1,35 @@
-%CODIGO PARA EVALUAR EL CLASSIFICADOR
 
 %Calculate the F-score (record and precision)
 
 
-%...............READING OF ANNOTATIONS FILE.............. in a  containers.Map
+%...............READING OF ANNOTATIONS FILE........... in a containers.Map
 
-fid=fopen('classes.csv')                       %reading of the model file
-DocVT= textscan(fid,'%s%s');                   %save it in a table 
-Map = containers.Map(DocVT{1,1},DocVT{1,2} );  %create a container of maps
-L=length(Map)                                  %adquire the lenght of the map
+fid=fopen('classes.csv');                    %reading of the model file
+DocVT= textscan(fid,'%s%s');                 %save it in a table 
+Map = containers.Map(DocVT{1,1},DocVT{1,2} );%create a container of maps
+L=length(Map)                                %adquire the lenght of the map
 
 
 %................READING OF FILE TO ASSES......................in a matrix
-%fid=fopen('classes.csv')                      %reading of the classifications file
-%FaE= textscan(fid,'%s%s');                    %save it in a table 
-%M_FaE=[FaE{1,1},FaE{1,2}];                    %crate a matrix with the previous table
+%fid=fopen('classes.csv')                   %reading of the classifications file
+%FaE= textscan(fid,'%s%s');                 %save it in a table 
+%M_FaE=[FaE{1,1},FaE{1,2}];                 %crate a matrix with the previous table
 
 
-%...................LECTURA FICHERO DE PRUEVA ..............MATRIZ_DIRECTA
+%...................LECTURA FICHERO DE PRUEVA ..................in a matrix
 
 M_FaE=salidaclases; %igualacion de matriz obtenida con load(PRUEVAS)
-LFV=length(M_FaE)%devuelve la long de las imagenes a evaluar
+LFV=length(M_FaE);%devuelve la long de las imagenes a evaluar
 
 
 
 %DECLARATION OF VARIABLES
 
-pc1=0; pc2=0; pc3=0; pc4=0; pc5=0; pc6=0; pc7=0; pc8=0; pc9=0;  %positive_trues
+pc1=0; pc2=0; pc3=0; pc4=0; pc5=0; pc6=0; pc7=0; pc8=0; pc9=0;  %positives_trues
 pf1=0; pf2=0; pf3=0; pf4=0; pf5=0; pf6=0; pf7=0; pf8=0; pf9=0;  %positives_falses
 nf1=0; nf2=0; nf3=0; nf4=0; nf5=0; nf6=0; nf7=0; nf8=0; nf9=0;  %negatives_falses
 nc1=0; nc2=0; nc3=0; nc4=0; nc5=0; nc6=0; nc7=0; nc8=0; nc9=0;  %negatives_trues
+
 
 %LOOP TO CREATE TE CONFUSION TABLES AND OBTAIN DIFERENT VALUES (precision, record, F-score)
 
@@ -39,8 +39,8 @@ for i=1:LFV                         % pass for all the positions of the clasific
     
  if(isKey(Map,x))                  % function that returns 1 if  id_imagen(x) is in the map(Map) 
     valueSet=values(Map,x);        % here we adquire the real event of the image to value
-       event1=char(M_FaE(i,2))    % pas it to a char to be able to compare it with other chars
-       eventC=char(valueSet)
+       event1=char(M_FaE(i,2));    % pas it to a char to be able to compare it with other chars
+       eventC=char(valueSet);
        
  %CALL THE FUNCTION matriz_confusion(), TO OBTAIN THE DIFERENT TABLES DEPENDING ON THE EVENT
 
@@ -124,8 +124,6 @@ val3=[pc3, pf3;
        nc9, nf9];
  tblwrite(val9,COL, FILA , 'non_event.xml') 
  
- 
-% JOIN ALL THE VALUES IN A UNIQUE CONFUSION MATRIX
 pc1=pc1+pc2+pc3+pc4+pc5+pc6+pc7+pc8+pc9;
 pf1=pf1+pf2+pf3+pf4+pf5+pf6+pf7+pf8+pf9;
 nf1=nf1+nf2+nf3+nf4+nf5+nf6+nf7+nf8+nf9;
@@ -135,7 +133,6 @@ nc1=nc1+nc2+nc3+nc4+nc5+nc6+nc7+nc8+nf9;
  valk=[pc1, pf1;
        nc1, nf1];
  tblwrite(valk,COL, FILA , 'avaluacion.xml')
- 
  
  
  
