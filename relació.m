@@ -1,3 +1,10 @@
+% This function related each class with it's corresponding IP
+% - pos: is the position where is the maximum matching tags
+% - tags:
+% - c1, c2, c3, c4, c5, c6, c7, c8: are the clases that correspond the image
+
+%_______________________________________________________________________________
+
 function clase=relacio(pos,tags,c1,c2,c3,c4,c5,c6,c7,c8)
 switch pos
     case 1
